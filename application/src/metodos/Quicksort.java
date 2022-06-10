@@ -3,15 +3,18 @@ package metodos;
 public class Quicksort {
 
     private static long trocasTotais = 0;
+    private static long comparacoesTotais = 0;
 
-    public static long quickSort(int[] dados, int inicio, int fim) {
+    public static long [] quickSort(int[] dados, int inicio, int fim) {
         if (inicio < fim) {                                      //array de tamanho 2 ou maior (inicio é antes do fim)
             int particao = particionar(dados, inicio, fim);     //chamada da partição para os dados
             quickSort(dados, inicio, particao - 1);             //recursividade: metade inicial (esquerda)
             quickSort(dados, particao + 1, fim);                //recursividade: metade final (direita)
         }
+        comparacoesTotais++;
+        long [] vet = {trocasTotais,comparacoesTotais};
 
-        return trocasTotais;
+        return vet;
     }
 
     /**
@@ -28,12 +31,16 @@ public class Quicksort {
         for(int i=inicio ; i<fim; i++){ //verificação de quem são os menores que o pivô
             if (dados[i] < pivot){          //sempre que é menor, aumentamos a partição e jogamos o elemento menor dentro da partição
                 particao++;
-                trocasTotais = Utils.trocar(dados, i, particao, trocasTotais);
+                Utils.trocar(dados, i, particao);
+                trocasTotais++;
             }
+            comparacoesTotais++;
+            
         }
 
         particao++;     //ao final, incrementamos a partição para posicionar o pivô no local correto
-        trocasTotais = Utils.trocar(dados, fim, particao, trocasTotais);
+        Utils.trocar(dados, fim, particao);
+        trocasTotais++;
         return particao;
     }
 

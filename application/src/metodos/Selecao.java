@@ -2,8 +2,9 @@ package metodos;
 
 public class Selecao {
 
-    public static long selectionSort(int[] dados) {
+    public static long [] selectionSort(int[] dados) {
         long trocasTotais = 0;
+        long comparacoesTotais = 0;
 
         //para cada posição de referência, do primeiro elemento ao penúltimo...
         for (int posReferencia = 0; posReferencia<dados.length-1 ; posReferencia++) {
@@ -14,12 +15,15 @@ public class Selecao {
 
                 if (dados[i] < dados[menor])    //se encontramos um menor, armazenamos a posição
                     menor = i;
+                    comparacoesTotais++;
             }
 
-            trocasTotais = Utils.trocar(dados, posReferencia, menor, trocasTotais); //trocamos o elemento da posição de referência com o menor encontrado
+            Utils.trocar(dados, posReferencia, menor); //trocamos o elemento da posição de referência com o menor encontrado
+            trocasTotais++;
         }
+        long[] vet={trocasTotais,comparacoesTotais};
 
-        return trocasTotais;
+        return vet;
     }
 
 }
