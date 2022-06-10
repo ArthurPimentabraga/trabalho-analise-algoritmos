@@ -14,16 +14,14 @@ public class Heapsort {
             trocasTotais++;
             maxHeapify(dados, 0, --n);
         }
-        long [] vet={trocasTotais,comparacoesTotais};
         
-        return vet;
+        return new long[]{trocasTotais, comparacoesTotais};
     }
 
     private static void buildMaxHeap(int[] dados) {
         for (int i = dados.length / 2 - 1; i >= 0; i--) {
             maxHeapify(dados, i, dados.length);
         }
-
     }
 
     private static void maxHeapify(int[] dados, int pos, int tamanhoDoVetor) {
@@ -45,9 +43,4 @@ public class Heapsort {
         comparacoesTotais++;
     }
 
-    /*public static void swap(int[] dados, int j, int aposJ) {
-        int aux = dados[j];
-        dados[j] = dados[aposJ];
-        dados[aposJ] = aux;
-    }*/
 }

@@ -2,9 +2,7 @@ package metodos;
 
 import constants.Constants;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -48,7 +46,6 @@ public class Utils {
                 Utils.trocar(vetAux, pos1, pos2);
             }
 
-
             gravarDados(vetAux, "T" + quant);
         }
     }
@@ -66,11 +63,37 @@ public class Utils {
         if ("y".equals(choose)) Utils.printVector(dados);
     }
 
+    public static int chooseTest() {
+        System.out.println("Escolha um tamanho de vetor para executar:");
+        System.out.println("1. 1000");
+        System.out.println("2. 10_000");
+        System.out.println("3. 100_000");
+        System.out.println("4. 1_000_000");
+        int choose = scanner.nextInt();
+        return Constants.TAMANHOS[choose-1];
+    }
+
     public static void printVector(int[] dados) {
         for (int i : dados) {
-            System.out.print(String.format("%3d", i) + " ");
+            System.out.print(i + " | ");
         }
         System.out.println("\n");
+    }
+
+    public static int[] carregarDados(int tamanho) throws IOException {
+        BufferedReader buffRead = new BufferedReader(new FileReader("T"+tamanho+".txt"));
+        int[] dados = new int[tamanho];
+        String linha;
+
+        for (int i = 0; i < dados.length; i++) {
+            linha = buffRead.readLine();
+            if (linha != null) {
+                dados[i] = Integer.parseInt(linha);
+            }
+        }
+
+        buffRead.close();
+        return dados;
     }
 
 }
