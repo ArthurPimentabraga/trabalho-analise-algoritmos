@@ -20,11 +20,11 @@ public class Utils {
      * @param pos1  Posição 1 para troca
      * @param pos2  Posição 2 para troca
      */
-    public static long trocar(int[] dados, int pos1, int pos2, long trocasTotais){
+    public static void trocar(int[] dados, int pos1, int pos2){
         int aux = dados[pos1];
         dados[pos1] = dados[pos2];
         dados[pos2] = aux;
-        return ++trocasTotais;
+        
     }
 
     public static void gerarDados() throws IOException {
@@ -45,7 +45,7 @@ public class Utils {
             for (int i = 1; i < (int)trocas ; i++) {     //até o número de trocas calculado...
                 int pos1 = sorteio.nextInt(quant);      //sorteamos duas posições e trocamos.
                 int pos2 = sorteio.nextInt(quant);
-                Utils.trocar(vetAux, pos1, pos2, 0);
+                Utils.trocar(vetAux, pos1, pos2);
             }
 
 
