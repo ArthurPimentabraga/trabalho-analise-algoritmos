@@ -1,10 +1,19 @@
 package metodos;
 
+import constants.Constants;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Utils {
 
-    //#region Metódos Utilitários
+    static Random sorteio = new Random(42);
+    static Scanner scanner = new Scanner(System.in);
+
     /**
      * Método auxiliar para trocar dois elementos de posição (necessário em todos os algoritmos de comparação)
      * @param dados O array com os dados
@@ -18,36 +27,50 @@ public class Utils {
         return ++trocasTotais;
     }
 
-    /**
-     * Gerador de conjuntos de dados int (arrays) para teste
-     * @param quant O tamanho do conjunto
-     * @param ordenado  Conjunto ordenado (true) ou não (false)
-     * @param proporcao Em caso de conjunto desordenadao, proporção dos elementos fora de lugar
-     * @return Um array com as características acima
-     */
-    public static int[] gerarDados(int quant, boolean ordenado, float proporcao, Random sorteio, long trocasTotais){
-        float trocas = quant * proporcao;  //quantidade de trocas para bagunçar os dados
+    public static void gerarDados() throws IOException {
+        for (int quant : Constants.TAMANHOS) {
+            float trocas = quant * 0.92f;  //quantidade de trocas para bagunçar os dados
 
-        int[] vetAux = new int[quant];
+            int[] vetAux = new int[quant];
 
-        //Criaremos o array com dados crescentes, para evitar repetições
-        int valorAtual = 1;
-        vetAux[0] = 1;
-        for(int i=1; i<quant; i++){
-            valorAtual += (sorteio.nextInt(11)+1);
-            vetAux[i] = valorAtual;
-        }
+            //Criaremos o array com dados crescentes, para evitar repetições
+            int valorAtual = 1;
+            vetAux[0] = 1;
+            for(int i = 1; i < quant; i++){
+                valorAtual += (sorteio.nextInt(11) + 1);
+                vetAux[i] = valorAtual;
+            }
 
-        //Vamos bagunçar o vetor, se for pedido pelo usuário.
-        if (!ordenado) {
-            for (int i = 1; i < (int)trocas ; i++){     //até o número de trocas calculado...
+            //Vamos bagunçar o vetor
+            for (int i = 1; i < (int)trocas ; i++) {     //até o número de trocas calculado...
                 int pos1 = sorteio.nextInt(quant);      //sorteamos duas posições e trocamos.
                 int pos2 = sorteio.nextInt(quant);
-
-                Utils.trocar(vetAux, pos1, pos2, trocasTotais);
+                Utils.trocar(vetAux, pos1, pos2, 0);
             }
+
+
+            gravarDados(vetAux, "T" + quant);
         }
-        return vetAux;
+    }
+
+    private static void gravarDados(int[] dados, String fileName) throws IOException {
+        FileWriter arq = new FileWriter(fileName + ".txt");
+        PrintWriter gravarArq = new PrintWriter(arq);
+        Arrays.stream(dados).forEach(gravarArq::println);
+        arq.close();
+    }
+
+    public static void askShouldPrint(String question, int[] dados) {
+        System.out.printf(question);
+        String choose = scanner.next();
+        if ("y".equals(choose)) Utils.printVector(dados);
+    }
+
+    public static void printVector(int[] dados) {
+        for (int i : dados) {
+            System.out.print(String.format("%3d", i) + " ");
+        }
+        System.out.println("\n");
     }
 
 }

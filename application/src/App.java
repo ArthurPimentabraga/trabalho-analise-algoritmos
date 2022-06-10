@@ -1,53 +1,46 @@
-import metodos.Insercao;
-import metodos.Quicksort;
+import constants.Constants;
 import metodos.Selecao;
 import metodos.Utils;
 
-import java.util.Random;
+import java.io.IOException;
 
 public class App {
-    static Random sorteio;
+
+    // TODO do projeto
+    // 1. Verificar porque os métodos não estão contabilizando as comparações
+    // 2. Executar todos os métodos de forma automatica
+    //  2.1. Ler dados dos arquivos gerados
+
     static long trocasTotais;
     static long comparacoesTotais;
 
-    public static void main(String[] args) {
-        final double NANO = (1.0f/1_000_000_000); // Nanossegundo: 1/10^9 segundos (para marcação de tempo)
-        final int TAMANHO = 10;                   // 100; 1000; 10_000; 100_000;
-        final int INITALEATORIO = 42;             // Semente do gerador aleatório (fixa para os testes)
-
+    public static void main(String[] args) throws IOException {
         long inicio, fim;
         double tempo;
 
-        sorteio = new Random(INITALEATORIO);
-        int[] dadosTesteAleat = Utils.gerarDados(TAMANHO, false, 0.92f, sorteio, trocasTotais);
+        Utils.gerarDados();
+
+        // TEMPORÁRIO
+        int[] dados = {58,9,42,23,29,33,1,44,47,14};
 
         trocasTotais = 0;
         comparacoesTotais = 0;
 
-        // Comentar para testes!
-        System.out.println("Array desordenado:");
-        for(int i : dadosTesteAleat){
-            System.out.print(String.format("%3d", i) + " ");
-        }
+        Utils.askShouldPrint(Constants.QUESTION_DISORDERED_VETOR, dados);
 
         inicio = System.nanoTime();
-        //trocasTotais = Selecao.selectionSort(dadosTesteAleat);
-        //Insercao.insertionSort(dadosTesteAleat);
-        Quicksort.quickSort(dadosTesteAleat, 0, dadosTesteAleat.length-1);
+        trocasTotais = Selecao.selectionSort(dados);
+        //Insercao.insertionSort(dados);
+        //Quicksort.quickSort(dados, 0, dados.length-1);
         fim = System.nanoTime();
-        tempo = (fim-inicio)*NANO;
+        tempo = (fim-inicio) * Constants.NANO;
 
-        // Comentar para testes!
-        System.out.println("\nArray ordenado:");
-        for(int i : dadosTesteAleat){
-            System.out.print(String.format("%3d", i) + " ");
-        }
+        Utils.askShouldPrint(Constants.QUESTION_ORDERED_VETOR, dados);
 
-        System.out.println();
         System.out.printf("Tempo decorrido: %.8f segundos\n", tempo);
         System.out.println("Trocas: " + trocasTotais);
         System.out.println("Comparações: " + comparacoesTotais);
-
+        System.out.println();
     }
 
 }
