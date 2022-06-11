@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Utils {
 
-    static Random sorteio = new Random(42);
+    static Random sorteio = new Random();
     static Scanner scanner = new Scanner(System.in);
 
     /**
