@@ -7,7 +7,7 @@ public class Insercao {
 
     public static long[] insertionSort(int[] dados) {
 
-        for(int posRef = 1; posRef < dados.length; posRef++) {  //a partir do segundo elemento (posição 1)...
+        for (int posRef = 1; posRef < dados.length; posRef++) {  //a partir do segundo elemento (posição 1)...
             int posComp = posRef - 1;                           //auxiliar para comparação com o elemento de referência
             int dadoRef = dados[posRef];                        //auxiliar para guardar o elemento de referência
 
@@ -29,9 +29,8 @@ public class Insercao {
             dados[posComp + 1] = dadoRef;
             trocasTotais++;
         }
-        long [] vet = {trocasTotais,comparacoesTotais};
 
-        return vet;
+        return new long[]{trocasTotais,comparacoesTotais};
     }
 
 }

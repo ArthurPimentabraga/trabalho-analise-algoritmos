@@ -68,7 +68,7 @@ public class Utils {
         System.out.println("1. 1000");
         System.out.println("2. 10_000");
         System.out.println("3. 100_000");
-        System.out.println("4. 1_000_000");
+        System.out.println("4. 500_000");
         int choose = scanner.nextInt();
         return Constants.TAMANHOS[choose-1];
     }

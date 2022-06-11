@@ -9,9 +9,6 @@ import java.io.IOException;
 
 public class App {
 
-    static long trocasTotais;
-    static long comparacoesTotais;
-
     public static void main(String[] args) throws IOException {
         long inicio, fim;
         double tempo;
@@ -21,8 +18,6 @@ public class App {
         int test = Utils.chooseTest();
 
         int[] dados = Utils.carregarDados(test);
-        trocasTotais = 0;
-        comparacoesTotais = 0;
         long[] totais;
 
         System.out.println("####################################################################");
@@ -44,8 +39,6 @@ public class App {
         System.out.println("QuickSort");
         dados = Utils.carregarDados(test);
         Utils.askShouldPrint(Constants.QUESTION_DISORDERED_VETOR, dados);
-        trocasTotais = 0;
-        comparacoesTotais = 0;
         inicio = System.nanoTime();
         totais = Quicksort.quickSort(dados, 0, dados.length-1);
         fim = System.nanoTime();
@@ -61,8 +54,6 @@ public class App {
         System.out.println("Selection");
         dados = Utils.carregarDados(test);
         Utils.askShouldPrint(Constants.QUESTION_DISORDERED_VETOR, dados);
-        trocasTotais = 0;
-        comparacoesTotais=0;
         inicio = System.nanoTime();
         totais = Selecao.selectionSort(dados);
         fim = System.nanoTime();
@@ -78,8 +69,6 @@ public class App {
         System.out.println("Insertion");
         dados = Utils.carregarDados(test);
         Utils.askShouldPrint(Constants.QUESTION_DISORDERED_VETOR, dados);
-        trocasTotais = 0;
-        comparacoesTotais=0;
         inicio = System.nanoTime();
         totais = Insercao.insertionSort(dados);
         fim = System.nanoTime();
