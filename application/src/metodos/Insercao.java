@@ -16,13 +16,13 @@ public class Insercao {
                 comparacoesTotais++;
             }
             comparacoesTotais++;
-            trocasTotais++;
+            //trocasTotais++;
 
             //posição encontrada. Copiar todos os elementos entre a posição de referência e o fim da comparação "para a frente"
             //note que não é uma troca: cópia é mais barato para o algoritmo (1 operação contra 3)
             for (int posCopia = posRef; posCopia > (posComp+1); posCopia--){
                 dados[posCopia] = dados[posCopia - 1];
-                trocasTotais++;
+                //trocasTotais++;
             }
 
             //inserimos o dado de referência em sua posição correta
